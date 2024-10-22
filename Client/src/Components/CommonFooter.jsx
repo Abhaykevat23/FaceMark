@@ -2,7 +2,10 @@ import React from 'react'
 
 function CommonFooter() {
   return (
-    <div>CommonFooter</div>
+    <div>
+      CommonFooter
+      {/* Make one line footer */}
+    </div>
   )
 }
 

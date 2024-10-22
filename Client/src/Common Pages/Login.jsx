@@ -1,7 +1,17 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate } from "react-router-dom";
 
 function Login() {
+
+
+    useEffect(() => {
+        if (localStorage.getItem('type') == 'instructor') {
+            navigate("/instructordashboard");
+        } else if(localStorage.getItem('type') == 'admin') {
+            navigate("/admindashboard");
+        }
+        
+    }, [])
 
     const [Credentials, setCredentials] = useState({ email: "", password: "", user_type: "" });
     const navigate = useNavigate();
@@ -24,10 +34,12 @@ function Login() {
 
             alert("success")
             if (Credentials.user_type == "instructor") {
-                navigate("/instructordashboard");
-            }else if(Credentials.user_type == "admin"){
+                navigate("/instructordashboard",{ state : true });
+                window.location.reload();
+            } else if (Credentials.user_type == "admin") {
                 navigate("/admindashboard");
-            }else{
+                window.location.reload();
+            } else {
                 navigate("/");
             }
             // If user login for admin then go to Admin dashboard else return bad credentials 
