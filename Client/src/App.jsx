@@ -14,6 +14,8 @@ import InstructorNavbar from './Components/InstructorNavbar';
 
 import AddNewStudent from './Instructor/AddNewStudent';
 import DisplayAttendance from './Instructor/Managing Pages/DisplayAttendance';
+import AdminNavbar from './Components/AdminNavbar';
+import AddInstructor from './SuperAdmin/Manage Instructor/AddInstructor';
 
 function App() {
   const [admin, setAdmin] = useState(false);
@@ -30,7 +32,7 @@ function App() {
     <>
       <Router>
         {instructor && <InstructorNavbar />}
-        {/* {admin && <AdminNavbar />}  */}
+        {admin && <AdminNavbar />} 
         <Routes>
           <Route path="/" element={<Login />} />
           {
@@ -42,6 +44,7 @@ function App() {
           }
           {
             admin && <>
+              <Route path="/addnewinstructor" element={<AddInstructor />} />
               <Route path="/admindashboard" element={<SuperAdminHome />} />
             </>
           }

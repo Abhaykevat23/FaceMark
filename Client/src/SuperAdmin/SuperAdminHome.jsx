@@ -16,16 +16,11 @@ function SuperAdminHome() {
     }
   }, [])
 
-  const logout = () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('type');
-    navigate("/");
-  }
-
   return (
     <>
-      <AdminNavbar />
-      <button className='btn btn-danger' onClick={logout}>LogOut</button>
+      <div>
+        hello
+      </div>
     </>
   )
 }
