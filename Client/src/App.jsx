@@ -1,20 +1,23 @@
+import { useEffect, useState } from 'react';
 import './App.css'
 import {
   BrowserRouter as Router,
   Route,
   Routes
 } from "react-router-dom";
+
 import Login from './Common Pages/Login';
+
 import SuperAdminHome from './SuperAdmin/SuperAdminHome';
 import InstructorHome from './Instructor/InstructorHome';
-import { useEffect, useState } from 'react';
 
-// import CommonFooter from './Components/CommonFooter';
 import InstructorNavbar from './Components/InstructorNavbar';
-
-import AddNewStudent from './Instructor/AddNewStudent';
-import DisplayAttendance from './Instructor/Managing Pages/DisplayAttendance';
 import AdminNavbar from './Components/AdminNavbar';
+// import CommonFooter from './Components/CommonFooter';
+
+import AddNewStudent from './Instructor/Manage Student/AddNewStudent';
+import DisplayAttendance from './Instructor/Manage Attendance/DisplayAttendance';
+
 import AddInstructor from './SuperAdmin/Manage Instructor/AddInstructor';
 
 function App() {

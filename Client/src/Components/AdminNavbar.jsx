@@ -22,20 +22,21 @@ function AdminNavbar() {
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="me-auto">
                             <NavDropdown title="Attendance" id="basic-nav-dropdown" className='ml-5'>
-                                <NavDropdown.Item><Link to="/displayattendance"> Display Attendance </Link></NavDropdown.Item>
-                                <NavDropdown.Item><Link to="/updateattendance"> Update Attendance </Link></NavDropdown.Item>
+                                <NavDropdown.Item><Link to="/displayattendance"> MCA Attendance </Link></NavDropdown.Item>
+                                <NavDropdown.Item><Link to="/displayattendance"> BCA Attendance </Link></NavDropdown.Item>
+                                {/* <NavDropdown.Item><Link to="/updateattendance"> Update Attendance </Link></NavDropdown.Item> */}
                             </NavDropdown>
 
                             <NavDropdown title="Student" id="basic-nav-dropdown" className='ml-5'>
                                 <NavDropdown.Item><Link to="/displaystudent"> Display Student </Link></NavDropdown.Item>
                                 <NavDropdown.Item><Link to="/addnewstudent"> Add Student </Link></NavDropdown.Item>
-                                <NavDropdown.Item><Link to="/updatestudent"> Update Student </Link></NavDropdown.Item>
+                                {/* <NavDropdown.Item><Link to="/updatestudent"> Update Student </Link></NavDropdown.Item> */}
                             </NavDropdown>
 
                             <NavDropdown title="Instructor" id="basic-nav-dropdown" className='ml-5'>
                                 <NavDropdown.Item><Link to="/displayinstructor"> Display Instructor </Link></NavDropdown.Item>
                                 <NavDropdown.Item><Link to="/addnewinstructor"> Add Instructor </Link></NavDropdown.Item>
-                                <NavDropdown.Item><Link to="/updateinstructor"> Update Instructor </Link></NavDropdown.Item>
+                                {/* <NavDropdown.Item><Link to="/updateinstructor"> Update Instructor </Link></NavDropdown.Item> */}
                             </NavDropdown>
                         </Nav>
                         <Nav.Link><button className='btn btn-danger' onClick={logout}>LogOut</button></Nav.Link>

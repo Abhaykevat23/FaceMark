@@ -10,7 +10,7 @@ function AddInstructor() {
   const [inputData, setInputData] = useState({ email: "", password: "", user_type: "", class: "", name: "" });
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await fetch("http://localhost:5000/api/manage/addinstructor", {
+    const response = await fetch("http://localhost:5000/api/manageuser/addinstructor", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
