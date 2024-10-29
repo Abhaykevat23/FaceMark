@@ -9,9 +9,6 @@ const path = require("path");
 
 // Route 1 : create Student ====================================
 
-//Image upload Code
-
-// Set up storage
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, "D:/Mini Project/FaceMark/Server/studentImages/");
@@ -25,13 +22,12 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 
-router.post('/addstudent', [
+router.post('/addstudent', upload.single("stud_image") ,[
     body('stud_name', 'Enter Valid name').notEmpty(),
     body('stud_class', 'Enter Valid class').notEmpty(),
     body('roll_no', 'Please write number').notEmpty(),
     body('enrollment_no', 'Please write number').notEmpty(),
-    upload.single("stud_image"),
-
+    
 ], async (req, res) => {
 
     // if there are errors then send bad request error message
@@ -63,7 +59,7 @@ router.post('/addstudent', [
             }
         }
         success = true;
-        res.json({ success, message: "Image uploaded successfully!", imagePath });
+        res.json({ success, message: "Student Added successfully!", imagePath });
 
     } catch (error) {
         console.error(error.message);
