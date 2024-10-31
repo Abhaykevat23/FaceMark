@@ -19,6 +19,7 @@ import AddNewStudent from './Instructor/Manage Student/AddNewStudent';
 import DisplayAttendance from './Instructor/Manage Attendance/DisplayAttendance';
 
 import AddInstructor from './SuperAdmin/Manage Instructor/AddInstructor';
+import DisplayStudents from './Instructor/Manage Student/DisplayStudents';
 
 function App() {
   const [admin, setAdmin] = useState(false);
@@ -43,6 +44,7 @@ function App() {
               <Route path="/instructordashboard" element={<InstructorHome />} />
               <Route path="/displayattendance" element={<DisplayAttendance />} />
               <Route path="/addnewstudent" element={<AddNewStudent />} />
+              <Route path="/displaystudents" element={<DisplayStudents />} />
             </>
           }
           {

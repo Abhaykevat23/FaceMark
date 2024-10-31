@@ -7,10 +7,10 @@ function Login() {
     useEffect(() => {
         if (localStorage.getItem('type') == 'instructor') {
             navigate("/instructordashboard");
-        } else if(localStorage.getItem('type') == 'admin') {
+        } else if (localStorage.getItem('type') == 'admin') {
             navigate("/admindashboard");
         }
-        
+
     }, [])
 
     const [Credentials, setCredentials] = useState({ email: "", password: "", user_type: "" });
@@ -32,9 +32,11 @@ function Login() {
             localStorage.setItem('type', Credentials.user_type);
             // props.showAlert("Loged-In Successfully","success");
 
-            alert("success")
+            // alert("success"+json.class);
+
             if (Credentials.user_type == "instructor") {
-                navigate("/instructordashboard",{ state : true });
+                localStorage.setItem('class',json.class);
+                navigate("/instructordashboard");
                 window.location.reload();
             } else if (Credentials.user_type == "admin") {
                 navigate("/admindashboard");

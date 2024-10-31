@@ -1,0 +1,19 @@
+1.
+    login : email - password 
+    ---> find user as per main and admin can make instructor of specific class
+
+
+2.
+    add instructor : no user selection , only class selection it always add instructor not admin. ...
+
+
+3.
+    display attendance : only class teacher can see attendance
+
+
+4.
+    display student : display as per class teacher.
+
+
+5. 
+    Search Student : serch button is there . apply logic...
