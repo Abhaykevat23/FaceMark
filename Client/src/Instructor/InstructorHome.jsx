@@ -21,15 +21,17 @@ function InstructorHome() {
     }
   }, [])
 
-  // ===========================================================
+  // =========================== Image Upload ================================
 
   const [image, setImage] = useState(null);
+  const [previewUrl, setPreviewUrl] = useState(null);
   const fileInputRef = useRef(null);
 
   const handleImageChange = (event) => {
     const selectedFile = event.target.files[0];
     if (selectedFile) {
       setImage(selectedFile);
+      setPreviewUrl(URL.createObjectURL(selectedFile));
     }
   };
   const handleSubmit = async () => {
@@ -60,7 +62,6 @@ function InstructorHome() {
 
   return (
     <>
-
       <div className='container'>
         <div className='position-relative'>
           <ToastContainer position="top-end" className="p-3 z-10" >
@@ -77,27 +78,32 @@ function InstructorHome() {
                 <strong className="me-auto">Hello Instructor</strong>
                 <small>Just Now</small>
               </Toast.Header>
-              <Toast.Body>Logged In SuccessFully</Toast.Body>
+              <Toast.Body className='text-white'>Logged In SuccessFully</Toast.Body>
             </Toast>
           </ToastContainer>
         </div>
 
 
-        <div>
-          <input
-            type="file"
-            accept="image/*"
-            onChange={handleImageChange}
-            ref={fileInputRef}
-          />
-          <button className='btn btn-success ml-3' onClick={handleSubmit}>Upload Image</button>
+        <div className="dashboard_container flex justify-center align-middle">
+          <div className="image_container border-gray border-2 h-[80vh] w-[45vw] m-2 ">
+            <div className='image_upload p-3 ml-4 text-center'>
+              <input type="file" accept=".jpg" onChange={handleImageChange} ref={fileInputRef} />
+              <button className='btn btn-success ml-3' onClick={handleSubmit}>Upload Image</button>
+            </div>
+            <div className="display_image p-3 ml-4 h-[50%] w-[90%] ">
+              {previewUrl && (
+                <div className='image_preview mt-3'>
+                  <img src={previewUrl} alt="Selected" style={{ maxWidth: '100%', maxHeight: '100%' }} />
+                </div>
+              )}
+            </div>
+          </div>
+          <div className="display_attendance border-gray border-2 h-[80vh] w-[45vw] m-2">
+              
+
+          </div>
         </div>
       </div>
-
-
-
-
-
     </>
   )
 }

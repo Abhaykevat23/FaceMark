@@ -9,10 +9,6 @@ var jwt = require('jsonwebtoken');
 const JWT_SECRET = 'facemark';
 let success = true;
 
-
-// ==================================================Instructor==============================================
-
-
 // Route 1 : create a instructor ====================================
 router.post('/addinstructor', [
     body('email', 'Enter Valid email').isEmail().notEmpty(),

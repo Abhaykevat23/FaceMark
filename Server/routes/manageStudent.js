@@ -56,7 +56,7 @@ router.post('/addstudent', upload.single("stud_image"), [
             }
         }
         success = true;
-        res.json({ success, message: "Student Added successfully!", imageName : newFilename });
+        res.json({ success, message: "Student Added successfully!", imageName: newFilename });
 
     } catch (error) {
         console.error(error.message);
@@ -67,10 +67,10 @@ router.post('/addstudent', upload.single("stud_image"), [
 
 // Route 2 : Display Student ====================================
 
-router.get('/displaystudents', async (req, res) => {
-
+router.post('/displaystudents', async (req, res) => {
+    const { instructorClass } = req.body;
     try {
-        const student = await Student.find();
+        const student = await Student.find({ student_class: instructorClass });
         res.json(student);
     } catch (error) {
         console.error(error.message);

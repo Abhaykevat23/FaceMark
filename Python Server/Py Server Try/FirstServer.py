@@ -18,8 +18,12 @@ def upload_image():
     file.save(f'uploads/{filename}')
 
     # Process the image here (e.g., resize, convert to grayscale)
+    
 
-    return {'message': 'Image uploaded successfully'}
+
+
+
+    return {'message': 'Image Processed successfully'}
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -3,7 +3,8 @@ import Table from 'react-bootstrap/Table';
 
 function DisplayStudents() {
 
-    const [students, setStudents] = useState([])
+    const [students, setStudents] = useState([]);
+    
     const displayColumns = [
         { key: "student_name", label: "Student Name" },
         { key: "student_class", label: "Class" },
@@ -14,16 +15,18 @@ function DisplayStudents() {
     useEffect(() => {
         const getStudents = async () => {
             const response = await fetch("http://localhost:5000/api/managestudent/displaystudents", {
-                method: "GET",
+                method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
+                body: JSON.stringify({ instructorClass }),
             });
             const data = await response.json();
-            // console.log(data);
+            console.log(data);
             setStudents(data);
         }
-
+        
+        const instructorClass = localStorage.getItem('class');
         getStudents();
     }, [])
 
@@ -50,7 +53,6 @@ function DisplayStudents() {
                                         <td key={column.key}>
                                             {column.key === "student_image" ? (
                                                 <img
-                                                    // src={`http://localhost:5000/studentImages/${student[column.key]}`}
                                                     src={`http://localhost:5000/studentImages/${student[column.key]}.jpg`}
                                                     alt={student.stud_name}
                                                     width="50"

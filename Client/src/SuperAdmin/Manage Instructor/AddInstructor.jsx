@@ -15,7 +15,8 @@ function AddInstructor() {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ email: inputData.email, password: inputData.password, user_type: inputData.user_type, class: inputData.class, name: inputData.name })
+      body: JSON.stringify({ email: inputData.email, password: inputData.password, user_type: "instructor", class: inputData.class, name: inputData.name })
+      // Manually written instructor....there is only instructor to add . so....
     });
     const json = await response.json();
     console.log(json);
@@ -51,11 +52,11 @@ function AddInstructor() {
               <option value="BCA-3">BCA-3</option>
             </Form.Select>
 
-            <Form.Select as={Row} name='user_type' sm="10" value={inputData.user_type} onChange={onChange} className="mb-3 w-[50%] ml-[17%]" aria-label="Default select example">
+            {/* <Form.Select as={Row} name='user_type' sm="10" value={inputData.user_type} onChange={onChange} className="mb-3 w-[50%] ml-[17%]" aria-label="Default select example">
               <option value="" >Select User</option>
               <option value="admin">Admin</option>
               <option value="instructor">Instructor</option>
-            </Form.Select>
+            </Form.Select> */}
 
             <Form.Group as={Row} className="mb-3" >
               <Form.Label column sm="2">

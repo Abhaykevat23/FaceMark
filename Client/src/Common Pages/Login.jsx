@@ -13,7 +13,7 @@ function Login() {
 
     }, [])
 
-    const [Credentials, setCredentials] = useState({ email: "", password: "", user_type: "" });
+    const [Credentials, setCredentials] = useState({ email: "", password: ""});
     const navigate = useNavigate();
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -22,36 +22,32 @@ function Login() {
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({ email: Credentials.email, password: Credentials.password, user_type: Credentials.user_type })
+            body: JSON.stringify({ email: Credentials.email, password: Credentials.password })
         });
         const json = await response.json();
         console.log(json);
+        
         if (json.success) {
-            //Save Auth Token And Redirect User
             localStorage.setItem('token', json.authToken);
-            localStorage.setItem('type', Credentials.user_type);
+            localStorage.setItem('type', json.user_type);
             // props.showAlert("Loged-In Successfully","success");
 
-            // alert("success"+json.class);
-
-            if (Credentials.user_type == "instructor") {
+            if (json.user_type == "instructor") {
                 localStorage.setItem('class',json.class);
                 navigate("/instructordashboard");
                 window.location.reload();
-            } else if (Credentials.user_type == "admin") {
+            } else if (json.user_type == "admin") {
                 navigate("/admindashboard");
                 window.location.reload();
             } else {
                 navigate("/");
             }
-            // If user login for admin then go to Admin dashboard else return bad credentials 
         } else {
             // props.showAlert("Invalid Credentials","danger");
         }
     }
 
     const onChange = (e) => {
-        // alert(Credentials.user_type)
         setCredentials({ ...Credentials, [e.target.name]: e.target.value });
     }
     return (
@@ -65,14 +61,14 @@ function Login() {
                     <label htmlFor="password" className="form-label">Password</label>
                     <input type="password" id="password" className="form-control" name='password' value={Credentials.password} onChange={onChange} required />
                 </div>
-                <div className="mb-3">
+                {/* <div className="mb-3">
                     <label htmlFor="user_type" className="form-label">Select User</label><br />
                     <select name='user_type' className='text-black w-40' value={Credentials.user_type} onChange={onChange} >
                         <option value="">Select</option>
                         <option value="admin">Admin</option>
                         <option value="instructor">Instructor</option>
                     </select>
-                </div>
+                </div> */}
                 <button type="submit" className="btn btn-primary mb-3 w-[10%]" >Log-in</button>
             </form>
         </div>
