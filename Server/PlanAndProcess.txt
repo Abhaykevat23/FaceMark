@@ -17,3 +17,8 @@
 
 5. 
     Search Student : serch button is there . apply logic...
+
+
+6.========= instructor home
+    add attendance : select --> class , date , 
+    attendance update not allowed for other classes , only allowed for own classes 

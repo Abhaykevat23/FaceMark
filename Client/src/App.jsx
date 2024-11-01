@@ -21,6 +21,8 @@ import DisplayAttendance from './Instructor/Manage Attendance/DisplayAttendance'
 import AddInstructor from './SuperAdmin/Manage Instructor/AddInstructor';
 import DisplayStudents from './Instructor/Manage Student/DisplayStudents';
 
+import { SearchProvider } from './SearchContext';
+
 function App() {
   const [admin, setAdmin] = useState(false);
   const [instructor, setInstructor] = useState(false);
@@ -35,26 +37,28 @@ function App() {
   return (
     <>
       <Router>
-        {instructor && <InstructorNavbar />}
-        {admin && <AdminNavbar />} 
-        <Routes>
-          <Route path="/" element={<Login />} />
-          {
-            instructor && <>
-              <Route path="/instructordashboard" element={<InstructorHome />} />
-              <Route path="/displayattendance" element={<DisplayAttendance />} />
-              <Route path="/addnewstudent" element={<AddNewStudent />} />
-              <Route path="/displaystudents" element={<DisplayStudents />} />
-            </>
-          }
-          {
-            admin && <>
-              <Route path="/addnewinstructor" element={<AddInstructor />} />
-              <Route path="/admindashboard" element={<SuperAdminHome />} />
-            </>
-          }
-        </Routes>
-        {/* <CommonFooter /> */}
+        <SearchProvider>
+          {instructor && <InstructorNavbar />}
+          {admin && <AdminNavbar />}
+          <Routes>
+            <Route path="/" element={<Login />} />
+            {
+              instructor && <>
+                <Route path="/instructordashboard" element={<InstructorHome />} />
+                <Route path="/displayattendance" element={<DisplayAttendance />} />
+                <Route path="/addnewstudent" element={<AddNewStudent />} />
+                <Route path="/displaystudents" element={<DisplayStudents />} />
+              </>
+            }
+            {
+              admin && <>
+                <Route path="/addnewinstructor" element={<AddInstructor />} />
+                <Route path="/admindashboard" element={<SuperAdminHome />} />
+              </>
+            }
+          </Routes>
+          {/* <CommonFooter /> */}
+        </SearchProvider>
       </Router>
     </>
   )

@@ -2,12 +2,21 @@ import React, { useEffect, useRef, useState } from 'react'
 import { useNavigate } from "react-router-dom";
 import ToastContainer from 'react-bootstrap/ToastContainer';
 import Toast from 'react-bootstrap/Toast';
+import Table from 'react-bootstrap/esm/Table';
 
 
 function InstructorHome() {
 
   const navigate = useNavigate();
   const [show, setShow] = useState(true);
+  const [attendanceData, setAttendanceData] = useState([]);
+  const [tempData, setTempData] = useState();
+
+  const displayColumns = [
+    { key: "student_name", label: "Student Name" },
+    { key: "roll_number", label: "Roll Number" },
+    { key: "enrollment_number", label: "Enrollment Number" },
+  ];
 
   useEffect(() => {
     if (!localStorage.getItem('token')) {
@@ -21,8 +30,8 @@ function InstructorHome() {
     }
   }, [])
 
-  // =========================== Image Upload ================================
 
+  // =========================== Image Upload ================================
   const [image, setImage] = useState(null);
   const [previewUrl, setPreviewUrl] = useState(null);
   const fileInputRef = useRef(null);
@@ -34,6 +43,7 @@ function InstructorHome() {
       setPreviewUrl(URL.createObjectURL(selectedFile));
     }
   };
+
   const handleSubmit = async () => {
     if (!image) {
       alert('Please select an image.');
@@ -54,11 +64,33 @@ function InstructorHome() {
       }
 
       const data = await response.json();
-      console.log(data);
+
+      const flattenedArray = data.data.flat();
+      // console.log(flattenedArray);
+      setTempData(flattenedArray);
+
+      if(data){
+        getPresentStudents();
+      }
+
     } catch (error) {
       console.error(error);
     }
   };
+  //=============================== get Present Students full data ================================
+
+  const getPresentStudents = async () => {
+    const response = await fetch("http://localhost:5000/api/managestudent/getpresentstudents", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body:JSON.stringify({tempData}),
+    });
+    const data = await response.json();
+    // console.log("last Data..........."+ data);
+    setAttendanceData(data);
+  }
 
   return (
     <>
@@ -98,9 +130,27 @@ function InstructorHome() {
               )}
             </div>
           </div>
-          <div className="display_attendance border-gray border-2 h-[80vh] w-[45vw] m-2">
-              
-
+          <div className="display_attendance border-gray border-2 h-[80vh] w-[45vw] m-2 overflow-scroll">
+            <Table responsive className='text-center'>
+              <thead>
+                <tr>
+                  <th>Sr.No</th>
+                  {displayColumns.map((column) => (
+                    <th key={column.key}>{column.label}</th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {attendanceData.map((student, index) => (
+                  <tr key={index}>
+                    <td>{index + 1}</td>
+                    {displayColumns.map((column) => (
+                      <td key={column.key}> {student[column.key]} </td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </Table>
           </div>
         </div>
       </div>

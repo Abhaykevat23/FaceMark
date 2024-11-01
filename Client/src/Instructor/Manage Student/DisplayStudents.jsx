@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Table from 'react-bootstrap/Table';
+import SearchContext from '../../SearchContext';
 
 function DisplayStudents() {
 
+    const { searchTerm } = useContext(SearchContext);
     const [students, setStudents] = useState([]);
     
     const displayColumns = [
@@ -30,7 +32,10 @@ function DisplayStudents() {
         getStudents();
     }, [])
 
-
+    const filteredStudents = students.filter(student =>
+        student.student_name.toLowerCase().includes(searchTerm.toLowerCase())||
+        student.enrollment_number.toLowerCase().includes(searchTerm.toLowerCase())
+    );
 
     return (
         <>
@@ -46,7 +51,7 @@ function DisplayStudents() {
                             </tr>
                         </thead>
                         <tbody>
-                            {students.map((student, index) => (
+                            {filteredStudents.map((student, index) => (
                                 <tr key={index}>
                                     <td>{index + 1}</td>
                                     {displayColumns.map((column) => (

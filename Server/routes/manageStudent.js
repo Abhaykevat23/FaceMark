@@ -78,4 +78,21 @@ router.post('/displaystudents', async (req, res) => {
     }
 })
 
+
+// Route 3 : Get Present Students Only ====================================
+
+router.post('/getpresentstudents', async (req, res) => {
+    const { tempData } = req.body;
+    try {
+        const presentStudent = await Student.find(
+            { enrollment_number: { $in: tempData } },
+            { student_name: 1, roll_number: 1, enrollment_number:1, _id: 0 }
+        );
+        res.json(presentStudent);
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).send("Internal Server Error")
+    }
+})
+
 module.exports = router
