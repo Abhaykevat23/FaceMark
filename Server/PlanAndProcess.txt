@@ -21,4 +21,4 @@
 
 6.========= instructor home
     add attendance : select --> class , date , 
-    attendance update not allowed for other classes , only allowed for own classes 
+    attendance update not allowed for other classes , only allowed for own classes
